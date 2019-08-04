@@ -3,10 +3,13 @@ import Users
 
 
 class SnakeMainMenu(object):
+
+#main class builder Menu
     def __init__(self,menu):
         self.menu = menu
         curses.wrapper(self.LoopGame)
 
+#menu with while until the option is to exit
     def LoopGame(self,screenS):
         curses.curs_set(0)
         curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_GREEN)
@@ -36,8 +39,15 @@ class SnakeMainMenu(object):
                         cicular.GenerateReportUsers()
 
             self.PrintAllMenu(selectedRow)
+# here print everythink at the center of the panel
+    def PrintCenter(self,Wtext):
+        self.screenS.clear()
+        x=self.screen_width//2-len(Wtext)// 2
+        y=self.screen_height // 2
+        self.screenS.addstr(y,x,Wtext)
+        self.screenS.refresh()
 
-
+#PrintAll the Menu when the options selected or move selector
     def PrintAllMenu(self,SelectedRow):
         self.screenS.clear()
         for xC,rowSe in enumerate(self.menu):
@@ -49,36 +59,15 @@ class SnakeMainMenu(object):
                 self.screenS.addstr(y,x,rowSe)
         self.screenS.refresh()
 
+#The variable take the coordinates of the game
     def ColorPrintPiC(self,y,x,Wtext,num):
         self.screenS.attron(curses.color_pair(num))
         self.screenS.addstr(y,x,Wtext)
         self.screenS.attroff(curses.color_pair(num))
 
-    def PrintConfirm(self,selected="yes"):
-        curses.setsyx(self.screen_height//2+1,0)
-        self.screenS.clrtoeol()
-
-        y=self.screen_height//2+1
-        WidthOption = 10
-
-        Option="yes"
-        x=self.screen_width//2-WidthOption//2+len(Option)
-        if selected== Option:
-            self.ColorPrintPiC(y,x,Option,1)
-        else:
-            self.screenS.addstr(y,x,Option)
-
-        Option="no"
-        x=self.screen_width//2+WidthOption//2-len(Option)
-        if selected==Option:
-            self.ColorPrintPiC(y,x,Option,1)
-        else:
-            self.screenS.addstr(y,x,Option)
-        self.screenS.refresh()
-
+#The variable of the selection of each option
     def confirm(self,TextConfirmation):
         self.PrintCenter(TextConfirmation)
-
         SelectedOption = "yes"
         self.PrintConfirm(SelectedOption)
 
@@ -91,16 +80,27 @@ class SnakeMainMenu(object):
                 SelectedOption="yes"
             elif KeyAtSelect == curses.KEY_ENTER or KeyAtSelect in [10, 13]:
                 return True if SelectedOption=="yes" else False
-
             self.PrintConfirm(SelectedOption)
 
-    def PrintCenter(self,Wtext):
-        self.screenS.clear()
-        x=self.screen_width//2-len(Wtext)// 2
-        y=self.screen_height // 2
-        self.screenS.addstr(y,x,Wtext)
+#The option of the confirmation to each option
+    def PrintConfirm(self,selected="yes"):
+        curses.setsyx(self.screen_height//2+1,0)
+        self.screenS.clrtoeol()
+        y=self.screen_height//2+1
+        WidthOption = 10
+        Option="yes"
+        x=self.screen_width//2-WidthOption//2+len(Option)
+        if selected== Option:
+            self.ColorPrintPiC(y,x,Option,1)
+        else:
+            self.screenS.addstr(y,x,Option)
+        Option="no"
+        x=self.screen_width//2+WidthOption//2-len(Option)
+        if selected==Option:
+            self.ColorPrintPiC(y,x,Option,1)
+        else:
+            self.screenS.addstr(y,x,Option)
         self.screenS.refresh()
-
     pass
 
 
