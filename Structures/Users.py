@@ -102,8 +102,3 @@ class UsersList(object):
 
 
 	pass
-
-
-user = UsersList()
-user.BulkLoad()
-user.GenerateReportUsers()
