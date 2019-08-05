@@ -20,6 +20,10 @@ class UsersList(object):
 		self.first=None
 		self.end=None
 		self.Grafica = ""
+
+	def getDato(self):
+		return self.first.data
+		pass
 #get the boolean value if the list is empty or not
 	def getEmpty(self):
 		if self.first==None:
@@ -50,6 +54,15 @@ class UsersList(object):
 				if tempo==self.first:
 					break
 				pass
+#Show each user of the list
+	def PrintEach(self,cosa):
+		if self.getEmpty()==True:
+			print("The Circular List is Empty")
+		else:
+		#	print(tempo.data)
+	    #	self.first = tempo.next
+
+			pass
 
 	def BulkLoad(self):
 

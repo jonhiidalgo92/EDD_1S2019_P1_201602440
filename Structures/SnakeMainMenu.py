@@ -31,13 +31,27 @@ class SnakeMainMenu(object):
                     if self.confirm("Are you sure you want to exit?"):
                         break
                 if selectedRow == len(self.menu) -2:
-                    if self.confirm("Are you want to see users?"):
+                    if self.confirm("Do you want to BulkLoad?"):
                         cicular = Users.UsersList()
                         cicular.BulkLoad()
                 if selectedRow == len(self.menu) -3:
                     if self.confirm("Do you Want to see Report?"):
                         cicular.GenerateReportUsers()
-
+                if selectedRow == len(self.menu) -4:
+                    data = cicular.first
+                    while data.next!=None and KeyAtSelect != ord("q"):
+                        if self.confirm("Para Avanzar a la Derecha Seleccione Yes \n Para Avanzar a la Izquierda Seleccione No\n"):
+                            data = data.next
+                            if self.confirm("El Dato es:"+data.data+"\n Presione Yes Para Seguir Visualizando.. \n Para Salir Presione No"):
+                                print("sabe")
+                            else:
+                                break
+                        else:
+                            data = data.prev
+                            if self.confirm("El Dato es:"+data.data+"\n Presione Yes Para seguir Visualizando.. \n Para Salir Presione No"):
+                                print("sabe")
+                            else:
+                                break
             self.PrintAllMenu(selectedRow)
 # here print everythink at the center of the panel
     def PrintCenter(self,Wtext):
