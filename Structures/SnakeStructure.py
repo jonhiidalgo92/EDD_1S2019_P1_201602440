@@ -22,9 +22,6 @@ ZiseVertical_Snake = 3
 TimeEnd = 100
 
 
-
-
-
 class NodeSnake(object):
 	def __init__(self,x,y, char='#'):
 		self.x = x
@@ -190,6 +187,36 @@ class Snake(object):
 		os.system(comando)
 		os.system("GraficaSnake.png")
 		pass
-
+#Generate graphic of Snake
+	def GenerateSnakeOter(self,cosa):
+		Snake.GraficaSnake = Snake.GraficaSnake + "\n" +"digraph G {"+"\n"
+		if cosa.first==None:
+			print("The Snake is Empty")
+		else:
+			tempo = cosa.first
+			tempo2 = cosa.end
+			while tempo != None:
+				if tempo.next == None or tempo.prev == None:
+					Snake.GraficaSnake = Snake.GraficaSnake  +"\""+"("+str(tempo.x)+","+str(tempo.y)+")" +"\""+ "->" +"\""+ "Null"+ "\""+";"+"\n"
+				else:
+					Snake.GraficaSnake = Snake.GraficaSnake +"\""+"("+str(tempo.x)+","+str(tempo.y)+")"+"\"" + "->"+"\""+"("+str(tempo.next.x)+","+str(tempo.next.y)+")" +"\""+ ";"+"\n"
+				tempo = tempo.next
+				pass
+			while tempo2 != None:
+				if tempo2.prev == None or tempo2.next == None:
+					Snake.GraficaSnake = Snake.GraficaSnake +"\""+"("+str(tempo2.x)+","+str(tempo2.y)+")" +"\""+ "->" +"\""+ "Null"+ "\""+"[dir=back];"+"\n"
+				else:
+					Snake.GraficaSnake = Snake.GraficaSnake  +"\""+"("+str(tempo2.x)+","+str(tempo2.y)+")" +"\""+ "->"+"\""+"("+str(tempo2.next.x)+","+str(tempo2.next.y)+")" +"\""+"[dir=back];"+"\n"
+				tempo2 = tempo2.prev
+				pass
+		Snake.GraficaSnake = Snake.GraficaSnake +"\n"+"}"
+		print(Snake.GraficaSnake)
+		archivo = open('GraficaSnake.dot','w')
+		archivo.write(Snake.GraficaSnake)
+		archivo.seek(0)
+		comando = " dot -Tpng  GraficaSnake.dot -o GraficaSnake.png"
+		os.system(comando)
+		os.system("GraficaSnake.png")
+		pass
 
 pass

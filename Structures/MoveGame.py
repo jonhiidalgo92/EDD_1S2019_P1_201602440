@@ -105,9 +105,11 @@ def Funtion(stdscr):
 			snake[0][1] in [box[0][1], box[1][1]] or
 			snake[0] in snake[1:]):
 			msg = "Game Over!"
+			snak.GenerateSnakeOter(snak)
 			stdscr.addstr(sh//2, sw//2-len(msg)//2, msg)
 			stdscr.nodelay(0)
 			stdscr.getch()
+
 			break
 
 curses.wrapper(Funtion)
