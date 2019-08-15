@@ -42,16 +42,23 @@ class SnakeMainMenu(object):
                     while data.next!=None and KeyAtSelect != ord("q"):
                         if self.confirm("Para Avanzar a la Derecha Seleccione Yes \n Para Avanzar a la Izquierda Seleccione No\n"):
                             data = data.next
-                            if self.confirm("El Dato es:"+data.data+"\n Presione Yes Para Seguir Visualizando.. \n Para Salir Presione No"):
+                            if self.confirm("El Dato es:"+data.data+"\n Presione Yes Para Seguir Visualizando \n Para Salir Presione No"):
                                 print("sabe")
                             else:
                                 break
                         else:
                             data = data.prev
-                            if self.confirm("El Dato es:"+data.data+"\n Presione Yes Para seguir Visualizando.. \n Para Salir Presione No"):
+                            if self.confirm("El Dato es:"+data.data+"\n Presione Yes Para seguir Visualizando.. \n Para Salir No"):
                                 print("sabe")
                             else:
                                 break
+                if selectedRow == len(self.menu)-5:
+                    if self.confirm("Do you Want to see Scoore?"):
+                        print("hhhh");
+
+                if selectedRow == len(self.menu)-6:
+                    if self.confirm("Do you Want to play now?"):
+                        import MoveGame
             self.PrintAllMenu(selectedRow)
 # here print everythink at the center of the panel
     def PrintCenter(self,Wtext):
