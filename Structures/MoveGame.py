@@ -2,6 +2,7 @@
 import random
 import curses
 import SnakeStructure
+import ScoreQueue
 from curses import textpad
 
 def create_food(snake, box):
@@ -19,6 +20,7 @@ def Funtion(stdscr):
 	stdscr.nodelay(1)
 	stdscr.timeout(100)
 	snak = SnakeStructure.Snake()
+	#scor = ScoreQueue.ScoreQueue()
 	# create a game box
 	sh, sw = stdscr.getmaxyx()
 	box = [[3,3], [sh-3, sw-3]]  # [[ul_y, ul_x], [dr_y, dr_x]]
@@ -27,7 +29,7 @@ def Funtion(stdscr):
 	# create snake and set initial direction
 	snake = [[sh//2, sw//2+1], [sh//2, sw//2], [sh//2, sw//2-1]]
 	snak = SnakeStructure.Snake()
-
+	scor = ScoreQueue.ScoreQueue()
 
 	direction = curses.KEY_RIGHT
 
@@ -88,6 +90,7 @@ def Funtion(stdscr):
 			score_text = "Score: {}".format(score)
 			stdscr.addstr(1, sw//2 - len(score_text)//2, score_text)
 			snak.Insert(food[0],food[1])
+			scor.Insert(food[0],food[1])
 			# create new food
 			food = create_food(snake, box)
 			stdscr.addstr(food[0], food[1], '*')
@@ -106,6 +109,7 @@ def Funtion(stdscr):
 			snake[0] in snake[1:]):
 			msg = "Game Over!"
 			snak.GenerateSnakeOter(snak)
+			scor.GenerateGraphic2(scor)
 			stdscr.addstr(sh//2, sw//2-len(msg)//2, msg)
 			stdscr.nodelay(0)
 			stdscr.getch()

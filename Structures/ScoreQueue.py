@@ -24,7 +24,8 @@ class ScoreQueue(object):
 		if self.first==None:
 			return True
 #Insert the Elements in the Queue ScoreHeap
-	def Insert(self,node):
+	def Insert(self,x,y):
+		node=NodeQueue(x,y)
 		if self.getEmpty()==True:
 			self.first=node
 			self.top=node
@@ -75,9 +76,9 @@ class ScoreQueue(object):
 			tempo = self.first
 			while tempo != None:
 				if tempo.next == None:
-					ScoreQueue.graficaQueue = ScoreQueue.graficaQueue + tempo.data2 + "->" + "Null"+ ";"+"\n"
+					ScoreQueue.graficaQueue = ScoreQueue.graficaQueue +"\""+"("+str(tempo.data)+","+str(tempo.data2)+")" +"\""+ "->" + "Null"+ ";"+"\n"
 				else:
-					ScoreQueue.graficaQueue = ScoreQueue.graficaQueue + tempo.data2 + "->" + tempo.next.data2+ ";"+"\n"
+					ScoreQueue.graficaQueue = ScoreQueue.graficaQueue +"\""+"("+str(tempo.data)+","+str(tempo.data2)+")" +"\""+ "->"+"\""+"("+str(tempo.next.data)+","+str(tempo.next.data2)+")" +"\""+ ";"+"\n"
 				tempo = tempo.next
 				pass
 		ScoreQueue.graficaQueue = ScoreQueue.graficaQueue +"\n"+"}"
@@ -89,26 +90,27 @@ class ScoreQueue(object):
 		os.system(comando)
 		os.system("GraficaScore.png")
 
-
+#Generate graphic of Queue
+	def GenerateGraphic2(self,cosa):
+		ScoreQueue.graficaQueue = ScoreQueue.graficaQueue + "\n" +"digraph G {"+"\n"
+		if cosa.first==None:
+			print("The Queue is Empty")
+		else:
+			tempo = cosa.first
+			while tempo != None:
+				if tempo.next == None:
+					ScoreQueue.graficaQueue = ScoreQueue.graficaQueue +"\""+"("+str(tempo.data)+","+str(tempo.data2)+")" +"\""+ "->" + "Null"+ ";"+"\n"
+				else:
+					ScoreQueue.graficaQueue = ScoreQueue.graficaQueue +"\""+"("+str(tempo.data)+","+str(tempo.data2)+")" +"\""+ "->"+"\""+"("+str(tempo.next.data)+","+str(tempo.next.data2)+")" +"\""+ ";"+"\n"
+				tempo = tempo.next
+				pass
+		ScoreQueue.graficaQueue = ScoreQueue.graficaQueue +"\n"+"}"
+		print(ScoreQueue.graficaQueue)
+		archivo = open('GraficaScore.dot','w')
+		archivo.write(ScoreQueue.graficaQueue)
+		archivo.seek(0)
+		comando = " dot -Tpng  GraficaScore.dot -o GraficaScore.png"
+		os.system(comando)
+		os.system("GraficaScore.png")
 
 	pass
-score = ScoreQueue()
-
-score.RestrictioQueue("1","Armando")
-score.RestrictioQueue("2","jose")
-score.RestrictioQueue("3","Alejandro")
-score.RestrictioQueue("4","catalino")
-score.RestrictioQueue("5","cosa1")
-score.RestrictioQueue("6","cosa2")
-score.RestrictioQueue("7","cosa3")
-score.RestrictioQueue("8","jon")
-score.RestrictioQueue("9","isabel")
-score.RestrictioQueue("10","victoe")
-score.RestrictioQueue("11","mansilla")
-score.RestrictioQueue("12","joel")
-
-
-score.PrintAll()
-
-
-score.GenerateGraphic()
