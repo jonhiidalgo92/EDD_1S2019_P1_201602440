@@ -189,6 +189,7 @@ class Snake(object):
 		pass
 #Generate graphic of Snake
 	def GenerateSnakeOter(self,cosa):
+		cont = 0
 		Snake.GraficaSnake = Snake.GraficaSnake + "\n" +"digraph G {"+"\n"
 		if cosa.first==None:
 			print("The Snake is Empty")
@@ -196,6 +197,7 @@ class Snake(object):
 			tempo = cosa.first
 			tempo2 = cosa.end
 			while tempo != None:
+				cont+=1
 				if tempo.next == None or tempo.prev == None:
 					Snake.GraficaSnake = Snake.GraficaSnake  +"\""+"("+str(tempo.x)+","+str(tempo.y)+")" +"\""+ "->" +"\""+ "Null"+ "\""+";"+"\n"
 				else:
@@ -203,6 +205,7 @@ class Snake(object):
 				tempo = tempo.next
 				pass
 			while tempo2 != None:
+				cont+=1
 				if tempo2.prev == None or tempo2.next == None:
 					Snake.GraficaSnake = Snake.GraficaSnake +"\""+"("+str(tempo2.x)+","+str(tempo2.y)+")" +"\""+ "->" +"\""+ "Null"+ "\""+"[dir=back];"+"\n"
 				else:
